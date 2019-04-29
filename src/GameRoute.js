@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, NavLink, Switch} from "react-router-dom"
 import NewUser from './NewUser'
 import Home from './Home'
-import Questions from './Questions'
+
 
 
 class GameRoute extends Component {
@@ -22,7 +22,6 @@ class GameRoute extends Component {
           <Switch>
             <Route exact path="/" component={Home}/>
             <Route exact path="/NewUser" component={NewUser}/>
-            <Route exact path="/Questions" component={Questions}/>
           </Switch>
         </div>
       </Router>

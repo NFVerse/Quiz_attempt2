@@ -8,9 +8,8 @@ import DisplayQuestions from './DisplayQuestions'
 
 class Questions extends Component {
     state= {
-        score: [0],
-        title: [],
-        answers:[]
+        questions: [],
+        score: [0]
     }
 
     add1 = (event) => {
@@ -27,22 +26,25 @@ class Questions extends Component {
         this.setState({score: [output]})
     };
     
-    // handleSubmit = async (event) => {
-    //     event.preventDefault()
-    //     await fetch(`${apiurl}/user/${this.props.name}`, {
-    //         method : "PUT",
-    //         body: JSON.stringify(this.state)
-    //     }).then(console.log("updated"))
-    //     .catch(err => console.log(err))
-    //     // .then(button.style.display = "none") Heres an idea to get all the buttons to disappear when clicked! Style doesnt work, button needs to be defined.
-    // }
+    handleSubmit = async (event) => {
+        event.preventDefault()
+        await fetch(`${apiurl}/user/${this.props.user._id}`, {
+            method : "PUT",
+            body:  JSON.stringify({name: this.props.name, score : this.state.score}),
+        headers: {
+        'Accept': 'application/json',
+        'Content-Type' : 'application/json'
+    }}).then(console.log("Updated"))
+        .catch(err => console.log(err))
+        // .then(button.style.display = "none") Heres an idea to get all the buttons to disappear when clicked! Style doesnt work, button needs to be defined.
+    }
 
-    getQuestions = () => {
-        fetch(`${apiurl}/questions`)
+    getQuestions = async () => {
+        await fetch(`${apiurl}/questions`)
         .then(response => response.json())
-        .then(data => data.map(element => this.setState({ title : element.Title, answers: element.Answers})))
-        .then(()=> console.log(" State", this.state))
-        // .then(components => this.setState({ title : components } ))
+        .then(data => data.map(question => <DisplayQuestions key ={question._id} question={question} buttonAddScore={this.add1}/>))
+        .then(questions => this.setState({questions}))
+        .then(()=> console.log(" questions from Questions", this.state.questions))
         .catch(err =>console.log(err))
     }
 
@@ -51,26 +53,12 @@ class Questions extends Component {
     }
 
     render(){
-        // const answerOptions = this.state.answers.map(
-        //     answer => <button key={Object.keys(answer)} 
-        //     value={Object.values(answer)} onClick={this.add1}>
-        //     {Object.keys(answer)}</button>)
-        
-        // const questionsOptions = this.state.title.map(
-        //     question => <h3 key={Object.keys(question)} 
-        //     value={Object.values(question)}>{Object.keys(question)}</h3>)
-            
-        // console.log("questionOptions", Object.values(questionsOptions))
-        // console.log("state",this.state)
          return(
             <div>
-                {/* {questionsOptions}
-                {answerOptions}
-                <h2>{this.state.score}</h2>
-                <button onClick={this.reduce1}>Reduce this</button>
-                <button onClick={this.handleSubmit}>Update Score</button> */}
-                <DisplayQuestions/>
-              
+                {this.state.questions}
+              <button onClick={this.reduce1}>reduce</button>
+              <button onClick={this.handleSubmit}>Update</button>
+              <h3>Score! : {this.state.score}</h3>
             </div>
         )
     }

@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
 import { apiurl } from './config'
+import Questions from './Questions'
 // import { Link } from 'react-router-dom'
 
 class NewUser extends Component {
     state = {
         name: "",
-        score: []
     }
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value })
         }
 
-    handleSubmit = async (event) => {
+    handleSubmit = (event) => {
         event.preventDefault()
         this.newUserInput()
-        await this.props.history.push('./Questions')
     }
     
     newUserInput = async () => {
@@ -39,6 +38,9 @@ class NewUser extends Component {
                     value={this.state.name}
                     onChange={this.handleChange}/>
                 <input type='submit'/>
+                <br></br>
+                <br></br>
+                <Questions/>
                 </div>
             </form>
         )
