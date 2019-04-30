@@ -9,7 +9,7 @@ import DisplayQuestions from './DisplayQuestions'
 class Questions extends Component {
     state= {
         questions: [],
-        score: [0]
+        score: [0],
     }
 
     add1 = (event) => {
@@ -26,18 +26,18 @@ class Questions extends Component {
         this.setState({score: [output]})
     };
     
-    handleSubmit = async (event) => {
-        event.preventDefault()
-        await fetch(`${apiurl}/user/${this.props.user._id}`, {
-            method : "PUT",
-            body:  JSON.stringify({name: this.props.name, score : this.state.score}),
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type' : 'application/json'
-    }}).then(console.log("Updated"))
-        .catch(err => console.log(err))
-        // .then(button.style.display = "none") Heres an idea to get all the buttons to disappear when clicked! Style doesnt work, button needs to be defined.
-    }
+    // handleSubmit = async (event) => {
+    //     event.preventDefault()
+    //     await fetch(`${apiurl}/user/${this.props.name._id}`, {
+    //         method : "PUT",
+    //         body:  JSON.stringify({name: this.props.name, score : this.state.score}),
+    //     headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type' : 'application/json'
+    // }}).then(console.log("Updated"))
+    //     .catch(err => console.log(err))
+    //     // .then(button.style.display = "none") Heres an idea to get all the buttons to disappear when clicked! Style doesnt work, button needs to be defined.
+    // }// This was my attempt to get the reduce button to update with the specific User. Could not get it working properly so I changed directions.
 
     getQuestions = async () => {
         await fetch(`${apiurl}/questions`)

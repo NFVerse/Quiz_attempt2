@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import { apiurl } from './config'
 import "../src/I_styling/Home.css"
+import DeleteUser from './DeleteUser'
+
 
 class Home extends Component {
     state = {
         name: '',
-        score: []
+        score: 0
     }
     getUsers = async () => {
         await fetch(`${apiurl}/user`)
         .then(response => response.json())
-        .then(data => data.map(element => <h3 key={element._id}>{element.name}</h3>))
+        .then(data => data.map(element => <DeleteUser user={element} key={element._id}/>))
         .then(components => this.setState({ name : components}))
         .catch(err =>console.log(err))
     }
