@@ -1,4 +1,4 @@
-export const apiurl = "http://localhost:3000"
+export const apiurl = "https://quizgameapi.haydenmhall.now.sh"
 
 
 //This is a possible idea to do update with the questions. Have each button push into 
