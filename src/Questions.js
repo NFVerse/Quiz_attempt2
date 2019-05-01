@@ -56,8 +56,7 @@ class Questions extends Component {
          return(
             <div>
                 {this.state.questions}
-              <button onClick={this.reduce1}>reduce</button>
-              <button onClick={this.handleSubmit}>Update</button>
+              <button onClick={this.reduce1}>Find out Your Score and Click This Very LOOOOOOONNGGG Button!</button>
               <h3>Score! : {this.state.score}</h3>
             </div>
         )

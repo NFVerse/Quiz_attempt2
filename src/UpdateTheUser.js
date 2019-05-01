@@ -14,7 +14,7 @@ handleChange = (event) => {
 
 handleSubmitUpdate = async (event) => {
     event.preventDefault()
-    await fetch(`${apiurl}/user/${this.props.user}`, {
+    await fetch(`${apiurl}/user/${this.props.user._id}`, {
         method : "PUT",
         body:  JSON.stringify(this.state),
     headers: {
@@ -33,7 +33,6 @@ render(){
                         onChange ={this.handleChange}/>
             <input type='number'
                         name='score'
-                        value={this.state.score}
                         onChange ={this.handleChange}/>
             <input type='submit'/>
         </form>
